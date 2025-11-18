@@ -71,5 +71,6 @@
                       :width "90%"
                       :height "10px"
                       :anchor "top center")
+  :exclusive true
   :reserve (struts :side "top" :distance "4%")
   (bar))
