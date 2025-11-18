@@ -10,6 +10,6 @@ echo "[INFO] This will permanently delete hyprshewwll cache, configuration, and 
 read -p "Are you sure you want to continue? [y/N] " confirm
 
 if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
-    echo "[INFO] Be safe !"
+    echo "[DONE] Okay !"
     exit 1
 fi

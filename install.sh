@@ -39,22 +39,22 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 # Clone or update the repository
-# if [ -d "$INSTALL_DIR" ]; then
-#     echo "[INFO] Updating hyprshewwll"
-#     git -C "$INSTALL_DIR" pull
-# else
-#     echo "[INFO] Cloning hyprshewwll"
-#     git clone --depth=1 "$REPO_URL" "$INSTALL_DIR"
-# fi
+if [ -d "$INSTALL_DIR" ]; then
+    echo "[INFO] Updating hyprshewwll"
+    git -C "$INSTALL_DIR" pull
+else
+    echo "[INFO] Cloning hyprshewwll"
+    git clone --depth=1 "$REPO_URL" "$INSTALL_DIR"
+fi
 
 # Copy local fonts if not already present
-# if [ ! -d "$HOME/.fonts/SymbolsNerdFont" ]; then
-#   echo "[INFO] Copying local fonts to $HOME/.fonts/SymbolsNerdFont..."
-#   mkdir -p "$HOME/.fonts/SymbolsNerdFont"
-#   cp -r "$INSTALL_DIR/assets/fonts/"* "$HOME/.fonts"
-# else
-#   echo "[INFO] Local fonts are already installed. Skipping copy."
-# fi
+if [ ! -d "$HOME/.fonts/SymbolsNerdFont" ]; then
+  echo "[INFO] Copying local fonts to $HOME/.fonts/SymbolsNerdFont..."
+  mkdir -p "$HOME/.fonts/SymbolsNerdFont"
+  ln -s "$INSTALL_DIR/assets/fonts/"* "$HOME/.fonts"
+else
+  echo "[INFO] Local fonts are already installed. Skipping copy."
+fi
 
 # Check if yay exists, otherwise use paru
 DEFAULT_AUR="paru"
@@ -68,14 +68,26 @@ elif ! command -v paru &>/dev/null; then
     rm -rf "$TEMP_DIR"
 fi
 
-# Install required packages using the detected AUR helper
-# echo "[INFO] Installing required packages..."
-# $DEFAULT_AUR -Syy --needed --devel --noconfirm "${PACKAGES[@]}" || true
+# Linking hyprland config files
+if [ -d "$HOME/.config/hypr" ]; then
+    mv "$HOME/.config/hypr" "$HOME/.config/hypr_old"
+fi
+ln -s "$INSTALL_DIR/configs"* "$HOME/.config/hypr"
 
-# echo "[INFO] Starting hyprshewwll"
-# eww daemon 2>/dev/null || true
-# killall hyprshewwll 2>/dev/null || true
-# uwsm app -- eww open all >/dev/null 2>&1 &
-# disown
+# Linking eww config files
+if [ -d "$HOME/.config/eww" ]; then
+    mv "$HOME/.config/eww" "$HOME/.config/eww_old"
+fi
+mkdir -p "$HOME/.config/eww"
+ln -s "$INSTALL_DIR/widgets"* "$HOME/.config/eww"
+ln -s "$INSTALL_DIR/styles"* "$HOME/.config/eww"
+
+# Install required packages using the detected AUR helper
+echo "[INFO] Installing required packages..."
+$DEFAULT_AUR -Syy --needed --devel --noconfirm "${PACKAGES[@]}" || true
+
+echo "[INFO] Starting hyprshewwll"
+eww daemon 2>/dev/null || true
+disown
 
 echo "[DONE] Installation complete."
