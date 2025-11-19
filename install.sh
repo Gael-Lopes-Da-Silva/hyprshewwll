@@ -5,8 +5,7 @@ set -u          # Treat unset variables as errors
 set -o pipefail # Prevent errors in a pipeline from being masked
 
 REPO_URL="https://github.com/Gael-Lopes-Da-Silva/hyprquick.git"
-INSTALL_DIR="$HOME/.config/hypr/hyprquick"
-
+INSTALL_DIR="$HOME/.config/quickshell/hyprquick"
 PACKAGES=(
     quickshell            # Widget framework
 
@@ -29,48 +28,79 @@ PACKAGES=(
     tesseract             # OCR utils
 )
 
+print() {
+    local type="$1"
+    local text="$2"
+
+    case "$type" in
+        SKIP)     code="30" ;;
+        ERROR)     code="31" ;;
+        DONE)   code="32" ;;
+        WARN)  code="33" ;;
+        INFO)    code="34" ;;
+        *) code="0" ;;
+    esac
+
+    printf "\e[%sm[%s]\e[0m %s\n" "$code" "$type" "$text"
+}
+
 # Prevent running the script as root
 if [ "$(id -u)" -eq 0 ]; then
-    echo "[ERROR] Please do not run this script as root."
+    print "ERROR" "Please do not run this script as root."
     exit 1
 fi
 
 # Clone or update the repository
 if [ -d "$INSTALL_DIR" ]; then
-    echo "[INFO] Updating hyprquick"
+    print "INFO" "Updating hyprquick..."
     git -C "$INSTALL_DIR" pull
 else
-    echo "[INFO] Cloning hyprquick"
+    print "INFO" "Cloning hyprquick..."
     git clone --depth=1 "$REPO_URL" "$INSTALL_DIR"
 fi
 
 # Copy local fonts if not already present
 if [ ! -d "$HOME/.fonts/SymbolsNerdFont" ]; then
-  echo "[INFO] Copying local fonts to $HOME/.fonts/SymbolsNerdFont..."
-  mkdir -p "$HOME/.fonts/SymbolsNerdFont"
-  ln -s "$INSTALL_DIR/assets/fonts/"* "$HOME/.fonts"
+    print "INFO" "Copying local fonts to $HOME/.fonts/SymbolsNerdFont..."
+    mkdir -p "$HOME/.fonts/SymbolsNerdFont"
+    ln -s "$INSTALL_DIR/assets/fonts/"* "$HOME/.fonts"
 else
-  echo "[INFO] Local fonts are already installed. Skipping copy."
+    print "SKIP" "Local fonts are already installed. Skipping copy."
 fi
 
 # Linking hyprland config files
+print "INFO" "Linking hyprland config files..."
 if [ -d "$HOME/.config/hypr" ]; then
-    mv "$HOME/.config/hypr" "$HOME/.config/hypr_old"
-fi
-ln -s "$INSTALL_DIR/configs"* "$HOME/.config/hypr"
+    print "WARN" "A Hyprland config folder already exists!"
+    read -p "Do you want to rename it to hypr_old? [y/N] " confirm
 
-# Linking quickshell config files
-if [ -d "$HOME/.config/quickshell" ]; then
-    mv "$HOME/.config/quickshell" "$HOME/.config/quickshell_old"
+    if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+        mv "$HOME/.config/hypr" "$HOME/.config/hypr_old"
+        print "INFO" "Renamed existing folder to hypr_old."
+    else
+        print "WARN" "You chose not to rename the folder."
+        read -p "Do you want to DELETE the existing folder? [y/N] " delete_confirm
+
+        if [[ "$delete_confirm" == "y" || "$delete_confirm" == "Y" ]]; then
+            rm -rf "$HOME/.config/hypr"
+            print "INFO" "Deleted the existing hypr folder."
+        else
+            print "DONE" "Keeping existing folder. Aborting."
+            exit 1
+        fi
+    fi
 fi
-ln -s "$INSTALL_DIR/modules"* "$HOME/.config/quickshell"
+ln -s "$INSTALL_DIR/configs" "$HOME/.config/hypr"
+print "INFO" "Linked Hyprland config files."
 
 # Install required packages using the detected AUR helper
-echo "[INFO] Installing required packages..."
+print "INFO" "Installing required packages..."
 sudo pacman -Syy --needed --devel --noconfirm "${PACKAGES[@]}" || true
+print "INFO" "Required packages installed."
 
-echo "[INFO] Starting hyprquick"
+print "INFO" "Starting hyprquick..."
 # eww daemon 2>/dev/null || true
+print "INFO" "Hyprquick started."
 disown
 
-echo "[DONE] Installation complete."
+print "DONE" "Installation complete."
