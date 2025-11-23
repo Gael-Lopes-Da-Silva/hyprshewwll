@@ -59,15 +59,6 @@ else
     git clone --depth=1 "$REPO_URL" "$INSTALL_DIR"
 fi
 
-# Copy local fonts if not already present
-if [ ! -d "$HOME/.fonts/SymbolsNerdFont" ]; then
-    print "INFO" "Copying local fonts to $HOME/.fonts/SymbolsNerdFont..."
-    mkdir -p "$HOME/.fonts/SymbolsNerdFont"
-    ln -s "$INSTALL_DIR/assets/fonts/"* "$HOME/.fonts"
-else
-    print "SKIP" "Local fonts are already installed. Skipping copy."
-fi
-
 # Linking hyprland config files
 print "INFO" "Linking hyprland config files..."
 if [ -d "$HOME/.config/hypr" ]; then
@@ -90,7 +81,7 @@ if [ -d "$HOME/.config/hypr" ]; then
         fi
     fi
 fi
-ln -s "$INSTALL_DIR/configs" "$HOME/.config/hypr"
+ln -s "$INSTALL_DIR/configs/hypr" "$HOME/.config/hypr"
 print "INFO" "Linked Hyprland config files."
 
 # Install required packages using the detected AUR helper

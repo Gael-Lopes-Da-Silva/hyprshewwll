@@ -7,16 +7,18 @@ import Quickshell
 Singleton {
     id: root
 
-    property var options: QtObject {
-        // property var overview: QtObject {
-        //     property int rows: 2
-        //     property int columns: 5
-        //     property real scale: 0.16
-        //     property bool enable: true
-        // }
+    property var options: QtObject {}
 
-        // property var hacks: QtObject {
-        //     property int arbitraryRaceConditionDelay: 150
-        // }
+    property var fonts: QtObject {
+        property var bootstrapIcons: FontLoader {
+            source: "../assets/fonts/bootstrap-icons.woff2"
+        }
+    }
+
+    property var icons: QtObject {
+        property string wifi: "\uF61C"
+        property string wifi_1: "\uF619"
+        property string wifi_2: "\uF61A"
+        property string wifi_off: "\uF61B"
     }
 }
