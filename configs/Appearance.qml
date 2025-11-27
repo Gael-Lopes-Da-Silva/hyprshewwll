@@ -48,5 +48,11 @@ Singleton {
                 readonly property color color: "#ffffff"
             }
         }
+        readonly property var systemTray: QtObject {
+            readonly property color background: "#2a2a2a"
+            readonly property var button: QtObject {
+                readonly property color hovered: "#3a3a3a"
+            }
+        }
     }
 }

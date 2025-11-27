@@ -23,6 +23,7 @@ ColumnLayout {
 
         Loader {
             active: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length == 0
+            visible: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length == 0
             sourceComponent: Icon {
                 icon: GlobalIcons.layout_3_fill
                 color: Appearance.sidebar.workspaces.windowCount.color
@@ -41,6 +42,7 @@ ColumnLayout {
 
         Loader {
             active: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length > 0
+            visible: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length > 0
             sourceComponent: Text {
                 text: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length
                 color: Appearance.sidebar.workspaces.windowCount.color

@@ -9,9 +9,7 @@ Singleton {
 
     readonly property var wrapper: QtObject {
         readonly property real implicitSize: 20
-        readonly property var background: QtObject {
-            readonly property real radius: 30
-        }
+        readonly property real radius: 30
     }
 
     readonly property var sidebar: QtObject {
@@ -63,6 +61,14 @@ Singleton {
             readonly property var button: QtObject {
                 readonly property real margin: 4
                 readonly property real iconSize: 16
+            }
+        }
+        readonly property var systemTray: QtObject {
+            readonly property real radius: 100
+            readonly property real size: 40
+            readonly property var button: QtObject {
+                readonly property real margin: 4
+                readonly property real iconSize: 20
             }
         }
     }

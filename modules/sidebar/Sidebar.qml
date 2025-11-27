@@ -66,6 +66,16 @@ Loader {
                     Loader {
                         active: true
                         visible: true
+                        sourceComponent: SystemTray {
+                            screen: scope.screen
+                        }
+
+                        Layout.alignment: Qt.AlignCenter
+                    }
+
+                    Loader {
+                        active: true
+                        visible: true
                         sourceComponent: Status {
                             screen: scope.screen
                         }
