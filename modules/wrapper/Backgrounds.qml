@@ -3,8 +3,8 @@ import QtQuick.Shapes
 import QtQuick.Effects
 import Quickshell
 
-import "../../configs"
-import "../../services"
+import qs.configs
+import qs.services
 
 Item {
     required property var screen

@@ -12,13 +12,6 @@ Singleton {
     }
 
     readonly property var sidebar: QtObject {
-        readonly property var launcher: QtObject {
-            readonly property color background: "#2a2a2a"
-            readonly property var button: QtObject {
-                readonly property color hovered: "#3a3a3a"
-                readonly property color color: "#ffffff"
-            }
-        }
         readonly property var power: QtObject {
             readonly property color background: "#2a2a2a"
             readonly property var button: QtObject {
@@ -38,6 +31,21 @@ Singleton {
                     readonly property color selected: "#3a3a3a"
                     readonly property color color: "#ffffff"
                 }
+            }
+        }
+        readonly property var clock: QtObject {
+            readonly property color background: "#2a2a2a"
+            readonly property var button: QtObject {
+                readonly property color hovered: "#3a3a3a"
+                readonly property color iconColor: "#ffffff"
+                readonly property color color: "#ffffff"
+            }
+        }
+        readonly property var status: QtObject {
+            readonly property color background: "#2a2a2a"
+            readonly property var button: QtObject {
+                readonly property color hovered: "#3a3a3a"
+                readonly property color color: "#ffffff"
             }
         }
     }

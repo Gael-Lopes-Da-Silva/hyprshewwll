@@ -19,14 +19,6 @@ Singleton {
         readonly property real topMargin: 40
         readonly property real bottomMargin: 40
         readonly property real spacing: 20
-        readonly property var launcher: QtObject {
-            readonly property real radius: 100
-            readonly property real size: 40
-            readonly property var button: QtObject {
-                readonly property real margin: 4
-                readonly property real iconSize: 16
-            }
-        }
         readonly property var power: QtObject {
             readonly property real radius: 100
             readonly property real size: 40
@@ -51,6 +43,26 @@ Singleton {
                     readonly property real margin: 4
                     readonly property real fontSize: 12
                 }
+            }
+        }
+        readonly property var clock: QtObject {
+            readonly property real radius: 100
+            readonly property real size: 40
+            readonly property real spacing: 0
+            readonly property bool showSeconds: false
+            readonly property bool useTwelveHourClock: false
+            readonly property var button: QtObject {
+                readonly property real margin: 4
+                readonly property real iconSize: 16
+                readonly property real fontSize: 16
+            }
+        }
+        readonly property var status: QtObject {
+            readonly property real radius: 100
+            readonly property real size: 40
+            readonly property var button: QtObject {
+                readonly property real margin: 4
+                readonly property real iconSize: 16
             }
         }
     }

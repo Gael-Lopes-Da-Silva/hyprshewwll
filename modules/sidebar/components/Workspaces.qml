@@ -3,9 +3,9 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 
-import "../../configs"
-import "../../components"
-import "../../services"
+import qs.configs
+import qs.components
+import qs.services
 
 ColumnLayout {
     required property var screen
@@ -67,7 +67,6 @@ ColumnLayout {
         Layout.preferredHeight: (Config.sidebar.workspaces.indicators.size * Hyprland.workspaces.values.length) + (Config.sidebar.workspaces.indicators.spacing * (Hyprland.workspaces.values.length - 1))
 
         ColumnLayout {
-            id: workspaces
             spacing: Config.sidebar.workspaces.indicators.spacing
 
             anchors {
@@ -78,6 +77,7 @@ ColumnLayout {
                 model: Hyprland.workspaces
 
                 Item {
+                    Layout.alignment: Qt.AlignCenter
                     Layout.preferredWidth: Config.sidebar.workspaces.indicators.size
                     Layout.preferredHeight: Config.sidebar.workspaces.indicators.size
 

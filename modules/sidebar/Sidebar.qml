@@ -3,23 +3,25 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 
-import "../../configs"
-import "../../components"
-import "../../services"
+import qs.configs
+import qs.services
 
-Variants {
-    model: Quickshell.screens
+import "components"
 
-    Scope {
-        id: root
+Loader {
+    id: root
+    active: GlobalStates.showSidebar
+    visible: GlobalStates.showSidebar
+    sourceComponent: Variants {
+        model: Quickshell.screens
 
-        required property var modelData
+        Scope {
+            id: scope
 
-        Loader {
-            active: GlobalStates.showSidebar
+            required property var modelData
 
-            sourceComponent: PanelWindow {
-                screen: root.modelData
+            PanelWindow {
+                screen: scope.modelData
                 color: "transparent"
                 implicitWidth: Config.sidebar.implicitSize
 
@@ -41,14 +43,12 @@ Variants {
                         topMargin: Config.sidebar.topMargin
                     }
 
-                    Launcher {
-                        screen: root.screen
-
-                        Layout.alignment: Qt.AlignCenter
-                    }
-
-                    Workspaces {
-                        screen: root.screen
+                    Loader {
+                        active: true
+                        visible: true
+                        sourceComponent: Workspaces {
+                            screen: scope.screen
+                        }
 
                         Layout.alignment: Qt.AlignCenter
                     }
@@ -63,8 +63,32 @@ Variants {
                         bottomMargin: Config.sidebar.bottomMargin
                     }
 
-                    Power {
-                        screen: root.screen
+                    Loader {
+                        active: true
+                        visible: true
+                        sourceComponent: Status {
+                            screen: scope.screen
+                        }
+
+                        Layout.alignment: Qt.AlignCenter
+                    }
+
+                    Loader {
+                        active: true
+                        visible: true
+                        sourceComponent: Clock {
+                            screen: scope.screen
+                        }
+
+                        Layout.alignment: Qt.AlignCenter
+                    }
+
+                    Loader {
+                        active: true
+                        visible: true
+                        sourceComponent: Power {
+                            screen: scope.screen
+                        }
 
                         Layout.alignment: Qt.AlignCenter
                     }

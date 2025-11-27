@@ -2,9 +2,9 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 
-import "../../configs"
-import "../../components"
-import "../../services"
+import qs.configs
+import qs.components
+import qs.services
 
 ColumnLayout {
     required property var screen
@@ -19,20 +19,7 @@ ColumnLayout {
         Layout.preferredHeight: Config.sidebar.power.size
         Layout.preferredWidth: Config.sidebar.power.size
 
-        MouseArea {
-            hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
-
-            anchors {
-                fill: parent
-            }
-
-            onEntered: powerButton.color = Appearance.sidebar.power.button.hovered
-            onExited: powerButton.color = "transparent"
-        }
-
         Rectangle {
-            id: powerButton
             color: "transparent"
             radius: Config.sidebar.power.radius
 
@@ -50,6 +37,18 @@ ColumnLayout {
                     centerIn: parent
                     alignWhenCentered: false
                 }
+            }
+
+            MouseArea {
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+
+                anchors {
+                    fill: parent
+                }
+
+                onEntered: parent.color = Appearance.sidebar.power.button.hovered
+                onExited: parent.color = "transparent"
             }
         }
     }

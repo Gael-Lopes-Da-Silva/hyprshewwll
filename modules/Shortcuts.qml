@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 
-import "../services"
+import qs.services
 
 Item {
     GlobalShortcut {

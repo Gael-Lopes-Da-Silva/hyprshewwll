@@ -1,6 +1,6 @@
 import QtQuick
 
-import "../configs"
+import qs.configs
 
 Text {
     required property string icon

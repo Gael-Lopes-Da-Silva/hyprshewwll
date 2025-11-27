@@ -2,9 +2,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 
-import "../../configs"
-import "../../components"
-import "../../services"
+import qs.configs
+import qs.services
 
 Variants {
     model: Quickshell.screens
