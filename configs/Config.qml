@@ -9,55 +9,51 @@ Singleton {
 
     readonly property var wrapper: QtObject {
         readonly property real implicitSize: 20
-    }
-
-    readonly property var sidebar: QtObject {
-        readonly property real implicitWidth: 50
-
-        readonly property var workspaces: QtObject {
-            readonly property var background: QtObject {
-                readonly property real radius: 100
-            }
-
-            readonly property var icons: QtObject {
-                readonly property var background: QtObject {
-                    readonly property real radius: 100
-                }
-            }
+        readonly property var background: QtObject {
+            readonly property real radius: 30
         }
     }
 
-    readonly property var sizes: QtObject {
-        readonly property real scale: 1
-        readonly property int small: 11 * scale
-        readonly property int smaller: 12 * scale
-        readonly property int normal: 13 * scale
-        readonly property int larger: 15 * scale
-        readonly property int large: 18 * scale
-        readonly property int extraLarge: 28 * scale
-    }
-
-    readonly property var margins: QtObject {
-        readonly property real scale: 1
-        readonly property int extraSmall: 4 * scale
-        readonly property int small: 10 * scale
-        readonly property int smaller: 20 * scale
-        readonly property int normal: 30 * scale
-        readonly property int larger: 40 * scale
-        readonly property int large: 50 * scale
-        readonly property int extraLarge: 60 * scale
-    }
-
-    readonly property var radius: QtObject {
-        readonly property real scale: 1
-        readonly property int extraSmall: 4 * scale
-        readonly property int small: 8 * scale
-        readonly property int smaller: 14 * scale
-        readonly property int normal: 20 * scale
-        readonly property int larger: 28 * scale
-        readonly property int large: 34 * scale
-        readonly property int extraLarge: 38 * scale
-        readonly property int round: 100 * scale
+    readonly property var sidebar: QtObject {
+        readonly property real implicitSize: 50
+        readonly property real topMargin: 20
+        readonly property real bottomMargin: 20
+        readonly property real spacing: 20
+        readonly property var launcher: QtObject {
+            readonly property real radius: 100
+            readonly property real size: 40
+            readonly property real margin: 4
+            readonly property var button: QtObject {
+                readonly property real iconSize: 16
+            }
+        }
+        readonly property var power: QtObject {
+            readonly property real radius: 100
+            readonly property real size: 40
+            readonly property real margin: 4
+            readonly property var button: QtObject {
+                readonly property real iconSize: 16
+            }
+        }
+        readonly property var workspaces: QtObject {
+            readonly property real spacing: 4
+            readonly property var windowCount: QtObject {
+                readonly property real radius: 100
+                readonly property real size: 40
+                readonly property real margin: 4
+                readonly property real iconSize: 16
+                readonly property real fontSize: 12
+            }
+            readonly property var indicators: QtObject {
+                readonly property real radius: 100
+                readonly property real size: 40
+                readonly property real spacing: 4
+                readonly property real margin: 4
+                readonly property var indicator: QtObject {
+                    readonly property real fontSize: 12
+                }
+            }
+        }
     }
 
     readonly property var fonts: QtObject {

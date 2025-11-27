@@ -34,14 +34,53 @@ Item {
             PathLine { x: 0; y: 0 }
 
             PathMove {
-                x: GlobalStates.showSidebar ? Config.sidebar.implicitWidth : Config.wrapper.implicitSize
+                x: (GlobalStates.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize) + Config.wrapper.background.radius
                 y: Config.wrapper.implicitSize
             }
 
-            PathLine { x: screen.width - Config.wrapper.implicitSize; y: Config.wrapper.implicitSize }
-            PathLine { x: screen.width - Config.wrapper.implicitSize; y: screen.height - Config.wrapper.implicitSize }
-            PathLine { x: GlobalStates.showSidebar ? Config.sidebar.implicitWidth : Config.wrapper.implicitSize; y: screen.height - Config.wrapper.implicitSize }
-            PathLine { x: GlobalStates.showSidebar ? Config.sidebar.implicitWidth : Config.wrapper.implicitSize; y: Config.wrapper.implicitSize }
+            PathLine {
+                x: (screen.width - Config.wrapper.implicitSize) - Config.wrapper.background.radius
+                y: Config.wrapper.implicitSize
+            }
+            PathArc {
+                x: (screen.width - Config.wrapper.implicitSize)
+                y: Config.wrapper.implicitSize + Config.wrapper.background.radius
+                radiusX: Config.wrapper.background.radius
+                radiusY: Config.wrapper.background.radius
+            }
+
+            PathLine {
+                x: screen.width - Config.wrapper.implicitSize
+                y: (screen.height - Config.wrapper.implicitSize) - Config.wrapper.background.radius
+            }
+            PathArc {
+                x: (screen.width - Config.wrapper.implicitSize) - Config.wrapper.background.radius
+                y: screen.height - Config.wrapper.implicitSize
+                radiusX: Config.wrapper.background.radius
+                radiusY: Config.wrapper.background.radius
+            }
+
+            PathLine {
+                x: (GlobalStates.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize) + Config.wrapper.background.radius
+                y: screen.height - Config.wrapper.implicitSize
+            }
+            PathArc {
+                x: (GlobalStates.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize)
+                y: (screen.height - Config.wrapper.implicitSize) - Config.wrapper.background.radius
+                radiusX: Config.wrapper.background.radius
+                radiusY: Config.wrapper.background.radius
+            }
+
+            PathLine {
+                x: GlobalStates.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize
+                y: Config.wrapper.implicitSize + Config.wrapper.background.radius
+            }
+            PathArc {
+                x: (GlobalStates.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize) + Config.wrapper.background.radius
+                y: Config.wrapper.implicitSize
+                radiusX: Config.wrapper.background.radius
+                radiusY: Config.wrapper.background.radius
+            }
         }
     }
 

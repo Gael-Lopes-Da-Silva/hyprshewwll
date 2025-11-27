@@ -12,12 +12,32 @@ Singleton {
     }
 
     readonly property var sidebar: QtObject {
-        readonly property var workspaces: QtObject {
+        readonly property var launcher: QtObject {
             readonly property color background: "#2a2a2a"
-
-            readonly property var icons: QtObject {
-                readonly property color background: "#3a3a3a"
+            readonly property var button: QtObject {
+                readonly property color hovered: "#3a3a3a"
                 readonly property color color: "#ffffff"
+            }
+        }
+        readonly property var power: QtObject {
+            readonly property color background: "#2a2a2a"
+            readonly property var button: QtObject {
+                readonly property color hovered: "#3a3a3a"
+                readonly property color color: "#ffffff"
+            }
+        }
+        readonly property var workspaces: QtObject {
+            readonly property var windowCount: QtObject {
+                readonly property color background: "#2a2a2a"
+                readonly property color color: "#ffffff"
+            }
+            readonly property var indicators: QtObject {
+                readonly property color background: "#2a2a2a"
+                readonly property var indicator: QtObject {
+                    readonly property color background: "transparent"
+                    readonly property color selected: "#3a3a3a"
+                    readonly property color color: "#ffffff"
+                }
             }
         }
     }

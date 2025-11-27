@@ -29,7 +29,7 @@ Item {
     }
 
     ExclusionZone {
-        exclusiveZone: GlobalStates.showSidebar ? Config.sidebar.implicitWidth : Config.wrapper.implicitSize
+        exclusiveZone: GlobalStates.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize
 
         anchors {
             left: true
