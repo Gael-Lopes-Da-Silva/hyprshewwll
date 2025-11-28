@@ -21,41 +21,27 @@ ColumnLayout {
         Layout.preferredHeight: Config.sidebar.workspaces.windowCount.size
         Layout.preferredWidth: Config.sidebar.workspaces.windowCount.size
 
-        Loader {
-            active: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length == 0
+        Icon {
             visible: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length == 0
-            sourceComponent: Icon {
-                icon: GlobalIcons.layout_3_fill
-                color: Appearance.sidebar.workspaces.windowCount.color
-                size: Config.sidebar.workspaces.windowCount.iconSize
-
-                anchors {
-                    centerIn: parent
-                    alignWhenCentered: false
-                }
-            }
+            icon: GlobalIcons.layout_3_fill
+            color: Appearance.sidebar.workspaces.windowCount.color
+            size: Config.sidebar.workspaces.windowCount.iconSize
 
             anchors {
                 centerIn: parent
+                alignWhenCentered: false
             }
         }
 
-        Loader {
-            active: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length > 0
+        Text {
             visible: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length > 0
-            sourceComponent: Text {
-                text: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length
-                color: Appearance.sidebar.workspaces.windowCount.color
-                font.pointSize: Config.sidebar.workspaces.windowCount.fontSize
-
-                anchors {
-                    centerIn: parent
-                    alignWhenCentered: false
-                }
-            }
+            text: Hyprland.focusedMonitor.activeWorkspace.toplevels.values.length
+            color: Appearance.sidebar.workspaces.windowCount.color
+            font.pointSize: Config.sidebar.workspaces.windowCount.fontSize
 
             anchors {
                 centerIn: parent
+                alignWhenCentered: false
             }
         }
     }
@@ -102,41 +88,27 @@ ColumnLayout {
                             margins: Config.sidebar.workspaces.indicators.indicator.margin
                         }
 
-                        Loader {
-                            active: modelData.id > 0 && modelData.id <= 10
+                        Text {
                             visible: modelData.id > 0 && modelData.id <= 10
-                            sourceComponent: Text {
-                                text: modelData.id
-                                color: Appearance.sidebar.workspaces.indicators.indicator.color
-                                font.pointSize: Config.sidebar.workspaces.indicators.indicator.fontSize
-
-                                anchors {
-                                    centerIn: parent
-                                    alignWhenCentered: false
-                                }
-                            }
+                            text: modelData.id
+                            color: Appearance.sidebar.workspaces.indicators.indicator.color
+                            font.pointSize: Config.sidebar.workspaces.indicators.indicator.fontSize
 
                             anchors {
                                 centerIn: parent
+                                alignWhenCentered: false
                             }
                         }
 
-                        Loader {
-                            active: modelData.id <= 0 || modelData.id > 10
+                        Icon {
                             visible: modelData.id <= 0 || modelData.id > 10
-                            sourceComponent: Icon {
-                                icon: GlobalIcons.asterisk_fill
-                                color: Appearance.sidebar.workspaces.indicators.indicator.specialColor
-                                font.pointSize: Config.sidebar.workspaces.indicators.indicator.specialFontSize
-
-                                anchors {
-                                    centerIn: parent
-                                    alignWhenCentered: false
-                                }
-                            }
+                            icon: GlobalIcons.asterisk_fill
+                            color: Appearance.sidebar.workspaces.indicators.indicator.specialColor
+                            font.pointSize: Config.sidebar.workspaces.indicators.indicator.specialFontSize
 
                             anchors {
                                 centerIn: parent
+                                alignWhenCentered: false
                             }
                         }
                     }

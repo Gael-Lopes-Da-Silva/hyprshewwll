@@ -62,7 +62,19 @@ ColumnLayout {
 
                     Text {
                         id: clockHoursText
-                        text: Qt.formatDateTime(clockHours.date, Config.sidebar.clock.showSeconds ? (Config.sidebar.clock.useTwelveHourClock ? "hh\nmm\nss\nA" : "hh\nmm\nss") : (Config.sidebar.clock.useTwelveHourClock ? "hh\nmm\nA" : "hh\nmm"))
+                        text: {
+                            let time = "hh\nmm";
+
+                            if (Config.sidebar.clock.showSeconds) {
+                                time += "\nss";
+                            }
+
+                            if (Config.sidebar.clock.useTwelveHourClock) {
+                                time += "\nA";
+                            }
+
+                            return Qt.formatDateTime(clockHours.date, time);
+                        }
                         color: Appearance.sidebar.clock.button.color
                         font.pointSize: Config.sidebar.clock.button.fontSize
 

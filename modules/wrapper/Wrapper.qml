@@ -32,21 +32,11 @@ Variants {
             }
 
             mask: Region {
-                item: mask
+                x: GlobalDatas.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize
+                y: Config.wrapper.implicitSize
+                width: modelData.width - (GlobalDatas.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize) - Config.wrapper.implicitSize
+                height: modelData.height - Config.wrapper.implicitSize * 2
                 intersection: Intersection.Xor
-            }
-
-            Rectangle {
-                id: mask
-                color: "transparent"
-
-                anchors {
-                    fill: parent
-                    topMargin: Config.wrapper.implicitSize
-                    leftMargin: GlobalDatas.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize
-                    rightMargin: Config.wrapper.implicitSize
-                    bottomMargin: Config.wrapper.implicitSize
-                }
             }
 
             Backgrounds {
