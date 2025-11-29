@@ -7,8 +7,8 @@ import qs.configs
 import qs.services
 
 Loader {
-    active: true
-    visible: true
+    active: GlobalStates.showWrapper
+    visible: GlobalStates.showWrapper
     sourceComponent: Variants {
         model: Quickshell.screens
 
