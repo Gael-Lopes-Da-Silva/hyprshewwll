@@ -6,80 +6,84 @@ import Quickshell.Wayland
 import qs.configs
 import qs.services
 
-Variants {
-    model: Quickshell.screens
+Loader {
+    active: true
+    visible: true
+    sourceComponent: Variants {
+        model: Quickshell.screens
 
-    Scope {
-        id: root
+        Scope {
+            id: root
 
-        required property var modelData
+            required property var modelData
 
-        Exclusions {
-            screen: root.modelData
-        }
-
-        PanelWindow {
-            screen: root.modelData
-            color: "transparent"
-
-            WlrLayershell.namespace: GlobalDatas.appId + "_wrapper"
-            WlrLayershell.exclusionMode: ExclusionMode.Ignore
-
-            anchors {
-                top: true
-                left: true
-                right: true
-                bottom: true
+            Exclusions {
+                screen: root.modelData
             }
 
-            mask: Region {
-                item: mask
-                intersection: Intersection.Xor
-            }
+            PanelWindow {
+                screen: root.modelData
+                color: "transparent"
 
-            Item {
-                layer.enabled: true
-                layer.effect: MultiEffect {
-                    shadowEnabled: Config.wrapper.shadow.enabled
-                    blurMax: Config.wrapper.shadow.maxBlur
-                }
+                WlrLayershell.namespace: GlobalDatas.appId + "_wrapper"
+                WlrLayershell.exclusionMode: ExclusionMode.Ignore
 
                 anchors {
-                    fill: parent
+                    top: true
+                    left: true
+                    right: true
+                    bottom: true
                 }
 
-                Rectangle {
-                    color: Appearance.wrapper.background
-                    layer.enabled: true
-                    layer.effect: MultiEffect {
-                        maskSource: mask
-                        maskEnabled: true
-                        maskInverted: true
-                        maskThresholdMin: 0.5
-                        maskSpreadAtMin: 1
-                    }
-
-                    anchors {
-                        fill: parent
-                    }
+                mask: Region {
+                    item: mask
+                    intersection: Intersection.Xor
                 }
 
                 Item {
-                    id: mask
-                    visible: false
                     layer.enabled: true
+                    layer.effect: MultiEffect {
+                        shadowEnabled: Config.wrapper.shadow.enabled
+                        blurMax: Config.wrapper.shadow.maxBlur
+                    }
 
                     anchors {
                         fill: parent
                     }
 
                     Rectangle {
-                        radius: Config.wrapper.radius
+                        color: Appearance.wrapper.background
+                        layer.enabled: true
+                        layer.effect: MultiEffect {
+                            maskSource: mask
+                            maskEnabled: true
+                            maskInverted: true
+                            maskThresholdMin: 0.5
+                            maskSpreadAtMin: 1
+                        }
 
                         anchors {
                             fill: parent
-                            margins: Config.wrapper.implicitSize
-                            leftMargin: GlobalStates.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize
+                        }
+                    }
+
+                    Item {
+                        id: mask
+                        visible: false
+                        layer.enabled: true
+
+                        anchors {
+                            fill: parent
+                        }
+
+                        Rectangle {
+                            radius: Config.wrapper.radius
+
+                            anchors {
+                                fill: parent
+                                margins: Config.wrapper.implicitSize
+                                leftMargin: GlobalStates.showSidebar ? Config.sidebar.implicitSize : Config.wrapper.implicitSize
+                            }
                         }
                     }
                 }

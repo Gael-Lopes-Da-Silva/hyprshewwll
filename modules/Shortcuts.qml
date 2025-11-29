@@ -5,6 +5,8 @@ import Quickshell.Hyprland
 import qs.services
 
 Item {
+    id: root
+
     GlobalShortcut {
         appid: GlobalDatas.appId
         name: "toggleSidebar"
