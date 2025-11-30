@@ -7,6 +7,11 @@ import Quickshell
 Singleton {
     id: root
 
+    readonly property var wallpaper: QtObject {
+        readonly property string path: Qt.resolvedUrl("../assets/wallpapers/wallpaper.png")
+        readonly property bool animated: false
+    }
+
     readonly property var wrapper: QtObject {
         readonly property real implicitSize: 20
         readonly property real radius: 30

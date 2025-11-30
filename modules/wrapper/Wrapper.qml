@@ -16,9 +16,9 @@ Loader {
         model: Quickshell.screens
 
         Scope {
-            id: wrapper
-
             required property var modelData
+
+            id: wrapper
 
             Exclusions {
                 screen: wrapper.modelData
@@ -39,10 +39,7 @@ Loader {
                 }
 
                 mask: Region {
-                    x: 0
-                    y: 0
-                    width: wrapper.modelData.width
-                    height: wrapper.modelData.height
+                    item: mask
                     intersection: Intersection.Xor
 
                     regions: [

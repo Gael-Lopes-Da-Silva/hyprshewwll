@@ -26,12 +26,8 @@ Loader {
                 topMargin: Config.sidebar.topMargin
             }
 
-            Loader {
-                active: true
-                visible: true
-                sourceComponent: Workspaces {
-                    screen: root.screen
-                }
+            Workspaces {
+                screen: root.screen
 
                 Layout.alignment: Qt.AlignCenter
             }
@@ -46,42 +42,26 @@ Loader {
                 bottomMargin: Config.sidebar.bottomMargin
             }
 
-            Loader {
-                active: true
-                visible: true
-                sourceComponent: SystemTray {
-                    screen: root.screen
-                }
+            SystemTray {
+                screen: root.screen
 
                 Layout.alignment: Qt.AlignCenter
             }
 
-            Loader {
-                active: true
-                visible: true
-                sourceComponent: Status {
-                    screen: root.screen
-                }
+            Status {
+                screen: root.screen
 
                 Layout.alignment: Qt.AlignCenter
             }
 
-            Loader {
-                active: true
-                visible: true
-                sourceComponent: Clock {
-                    screen: root.screen
-                }
+            Clock {
+                screen: root.screen
 
                 Layout.alignment: Qt.AlignCenter
             }
 
-            Loader {
-                active: true
-                visible: true
-                sourceComponent: Power {
-                    screen: root.screen
-                }
+            Power {
+                screen: root.screen
 
                 Layout.alignment: Qt.AlignCenter
             }
