@@ -25,6 +25,7 @@ PACKAGES=(
     power-profiles-daemon # Power profiles
     imagemagick           # Image utility tools
     tesseract             # OCR utils
+    udiskie               # Auto mount usb
 )
 
 print() {
@@ -57,31 +58,6 @@ else
     print "INFO" "Cloning hyprquick..."
     git clone --depth=1 "$REPO_URL" "$INSTALL_DIR"
 fi
-
-# Linking hyprland config files
-print "INFO" "Linking hyprland config files..."
-if [ -d "$HOME/.config/hypr" ]; then
-    print "WARN" "A Hyprland config folder already exists!"
-    read -p "Do you want to rename it to hypr_old? [y/N] " confirm
-
-    if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
-        mv "$HOME/.config/hypr" "$HOME/.config/hypr_old"
-        print "INFO" "Renamed existing folder to hypr_old."
-    else
-        print "WARN" "You chose not to rename the folder."
-        read -p "Do you want to DELETE the existing folder? [y/N] " delete_confirm
-
-        if [[ "$delete_confirm" == "y" || "$delete_confirm" == "Y" ]]; then
-            rm -rf "$HOME/.config/hypr"
-            print "INFO" "Deleted the existing hypr folder."
-        else
-            print "DONE" "Keeping existing folder. Aborting."
-            exit 1
-        fi
-    fi
-fi
-ln -s "$INSTALL_DIR/configs/hypr" "$HOME/.config/hypr"
-print "INFO" "Linked Hyprland config files."
 
 # Install required packages using the detected AUR helper
 print "INFO" "Installing required packages..."
